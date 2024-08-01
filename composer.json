@@ -1,5 +1,6 @@
 {
     "name": "macocci7/php-lorenz-curve",
+    "version": "0.0.1",
     "description": "A PHP Library to plot a Lorenz Curve.",
     "type": "library",
     "license": "MIT",
