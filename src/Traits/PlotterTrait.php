@@ -1,0 +1,185 @@
+<?php
+
+namespace Macocci7\PhpLorenzCurve\Traits;
+
+use Macocci7\PhpPlotter2d\Plotter;
+use Macocci7\PhpPlotter2d\Canvas;
+use Macocci7\PhpPlotter2d\Transformer;
+
+trait PlotterTrait
+{
+    protected Canvas $canvas;
+    protected Transformer $transformer;
+
+    /**
+     * sets props
+     */
+    protected function setProps(): void
+    {
+        $this->parsed = $this->ft->parse();
+        $this->setDefaultPlotarea();
+        $this->createCanvas();
+        $this->transformer = $this->canvas->getTransformer();
+    }
+
+    /**
+     * creates canvas
+     */
+    protected function createCanvas(): void
+    {
+        $this->canvas = Plotter::make(
+            canvasSize: $this->canvasSize,
+            viewport: $this->viewport,
+            plotarea: $this->plotarea,
+            backgroundColor: $this->canvasBackgroundColor,
+        );
+    }
+
+    /**
+     * plots grids
+     */
+    protected function plotGrids(): void
+    {
+        if (!$this->showGrid) {
+            return;
+        }
+        $this->canvas->plotGridHorizon( // @phpstan-ignore-line
+            width: $this->gridWidth,
+            color: $this->gridColor,
+        );
+        $this->canvas->plotGridVertical( // @phpstan-ignore-line
+            width: $this->gridWidth,
+            color: $this->gridColor,
+        );
+        list($offsetX, $offsetY) = $this->plotarea['offset'];
+        $coords = $this->transformer->getCoords([[1, 0], [1, 1]]);
+        $this->canvas->drawLine(
+            $coords[0][0] + $offsetX,
+            $coords[0][1] + $offsetY,
+            $coords[1][0] + $offsetX,
+            $coords[1][1] + $offsetY,
+            $this->gridWidth,
+            $this->gridColor,
+        );
+    }
+
+    /**
+     * plots axis
+     */
+    protected function plotAxis(): void
+    {
+        list($offsetX, $offsetY) = $this->plotarea['offset'];
+        $coords = $this->transformer->getCoords([[0, 0], [1, 0]]);
+        $this->canvas->drawLine(
+            x1: $coords[0][0] + $offsetX,
+            y1: $coords[0][1] + $offsetY,
+            x2: $coords[1][0] + $offsetX,
+            y2: $coords[1][1] + $offsetY,
+        );
+        $this->canvas->plotAxisY(); // @phpstan-ignore-line
+    }
+
+    /**
+     * plots scales
+     */
+    protected function plotScales(): void
+    {
+        $this->canvas->plotScaleX(0.2); // @phpstan-ignore-line
+        $this->canvas->plotScaleY(0.2); // @phpstan-ignore-line
+        list($offsetX, $offsetY) = $this->plotarea['offset'];
+        $i = 0;
+        while ($i <= 1) {
+            $points = $this->transformer->getCoords([
+                [$i, 0],    // x-axis
+                [0, $i],    // y-axis
+            ]);
+            // x-axis
+            $this->canvas->drawText(
+                text: (string) $i,
+                x: $points[0][0] + $offsetX,
+                y: $points[0][1] + $offsetY + 8,
+                align: 'center',
+                valign: 'top',
+            );
+            // y-axis
+            $this->canvas->drawText(
+                text: (string) $i,
+                x: $points[1][0] + $offsetX - 8,
+                y: $points[1][1] + $offsetY,
+                align: 'right',
+                valign: 'middle',
+            );
+            $i += 0.2;
+        }
+    }
+
+    /**
+     * plots complete equality line
+     */
+    protected function plotCompleteEqualityLine(): void
+    {
+        // @phpstan-ignore-next-line
+        $this->canvas->plotLine(0, 0, 1, 1, 1, '#999999', dash: [4, 4]);
+    }
+
+    /**
+     * plots Lorenz Curve
+     */
+    protected function plotLorenzCurve(): void
+    {
+        $points = $this->getPoints();
+        $count = count($points);
+        $points[-1] = [0, 0];
+        if (count($points) > 2) {
+            $this->canvas->plotPolygon( // @phpstan-ignore-line
+                points: $points,
+                backgroundColor: '#ffcc00',
+                borderWidth: 0,
+                borderColor: null,
+            );
+        }
+        $this->canvas->plotPerfectCircle( // @phpstan-ignore-line
+            x: 0,
+            y: 0,
+            radius: 4,
+            backgroundColor: '#0000ff',
+            borderWidth: 0,
+        );
+        for ($i = 0; $i < $count; $i++) {
+            $this->canvas->plotLine( // @phpstan-ignore-line
+                x1: $points[$i - 1][0],
+                y1: $points[$i - 1][1],
+                x2: $points[$i][0],
+                y2: $points[$i][1],
+                width: 2,
+                color: '#0000ff',
+            );
+            $this->canvas->plotPerfectCircle( // @phpstan-ignore-line
+                x: $points[$i][0],
+                y: $points[$i][1],
+                radius: 4,
+                backgroundColor: '#0000ff',
+                borderWidth: 0,
+            );
+        }
+    }
+
+    /**
+     * creates and saves the image
+     *
+     * @param   string  $path
+     * @return  self
+     */
+    public function create(string $path)
+    {
+        $this->setProps();
+        $this->plotGrids();
+        $this->plotAxis();
+        $this->plotScales();
+        $this->plotLorenzCurve();
+        $this->plotCompleteEqualityLine();
+        //$this->plotLabels();
+        $this->canvas->save($path);
+        return $this;
+    }
+}

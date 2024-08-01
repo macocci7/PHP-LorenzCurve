@@ -1,0 +1,11 @@
+# Configuration for Macocci7\PhpLorenzCurve\LorenzCurve
+
+props:
+    canvasSize:
+        width: 400
+        height: 300
+    viewport:
+        x: [0, 1]
+        y: [0, 1]
+    plotarea: []
+    canvasBackgroundColor: '#ffffff'
