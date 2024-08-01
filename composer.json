@@ -1,0 +1,31 @@
+{
+    "name": "macocci7/php-lorenz-curve",
+    "description": "A PHP Library to plot a Lorenz Curve.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Macocci7\\PhpLorenzCurve\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "macocci7",
+            "email": "macocci7@yahoo.co.jp"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=8.1",
+        "nette/neon": "^3.4",
+        "macocci7/php-frequency-table": "^1.4",
+        "macocci7/php-plotter2d": "^0.1"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.7",
+        "phpstan/phpstan": "^1.10",
+        "phpmd/phpmd": "^2.15",
+        "phpunit/phpunit": "^10.5",
+        "php-parallel-lint/php-parallel-lint": "1.3"
+    }
+}
