@@ -138,7 +138,7 @@ double(0.37647058823529)
     ▼Gini's Coefficient:
 
     ```bash
-    int(0)
+    double(0)
     ```
 
 - [GinisCoefficientAlmost1.php](examples/GinisCoefficientAlmost1.php) >> results in:

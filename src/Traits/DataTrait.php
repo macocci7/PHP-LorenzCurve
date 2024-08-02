@@ -115,7 +115,7 @@ trait DataTrait
         list($x2, $y2) = $p2;
         if (($x1 - $y1) == 0 && ($x2 - $y2) == 0) {
             // in case the points are on the complete equality line
-            return 0;
+            return 0.0;
         }
         if (($x1 - $y1) * ($x2 - $y2) >= 0) {
             // in case the shape is a trapezoid
