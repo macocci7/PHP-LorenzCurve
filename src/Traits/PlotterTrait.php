@@ -165,6 +165,95 @@ trait PlotterTrait
     }
 
     /**
+     * plots label of X
+     * @return  self
+     */
+    private function plotLabelX()
+    {
+        if (!$this->labelX) {
+            return $this;
+        }
+        $baseY = (int) $this->plotarea['offset'][1]
+               + (int) $this->plotarea['height'];
+        $x = (int) $this->canvasSize['width'] / 2;
+        $y = (int) (
+            $baseY
+            + ($this->canvasSize['height'] - $this->plotarea['height'])
+            / 3
+        );
+        $this->canvas->drawText(
+            text: (string) $this->labelX,
+            x: $x + $this->labelXOffsetX,
+            y: $y + $this->labelXOffsetY,
+            fontSize: $this->fontSize,
+            fontPath: $this->fontPath,
+            fontColor: $this->fontColor,
+            align: 'center',
+            valign: 'bottom',
+        );
+        return $this;
+    }
+
+    /**
+     * plots label of Y
+     * @return  self
+     */
+    private function plotLabelY()
+    {
+        if (!$this->labelY) {
+            return $this;
+        }
+        $width = $this->canvasSize['height'];
+        $height = (int) round(
+            ($this->canvasSize['width'] - $this->plotarea['width']) / 2
+        );
+        $x = (int) round($width / 2);
+        $y = (int) round($height * 2 / 5);
+        $this->canvas->drawText(
+            text: (string) $this->labelY,
+            x: $x,
+            y: $y,
+            fontSize: $this->fontSize,
+            fontPath: $this->fontPath,
+            fontColor: $this->fontColor,
+            align: 'center',
+            valign: 'middle',
+            angle: 90,
+            offsetX: $this->labelYOffsetX,
+            offsetY: $this->labelYOffsetY,
+            rotateAlign: 'left',
+            rotateValign: 'bottom',
+        );
+        return $this;
+    }
+
+    /**
+     * plots caption
+     * @return  self
+     */
+    private function plotCaption()
+    {
+        if (!$this->caption) {
+            return $this;
+        }
+        $x = (int) round($this->canvasSize['width'] / 2);
+        $y = (int) round(
+            ($this->canvasSize['height'] - $this->plotarea['height']) / 3
+        );
+        $this->canvas->drawText(
+            (string) $this->caption,
+            $x + $this->captionOffsetX,
+            $y + $this->captionOffsetY,
+            fontSize: $this->fontSize,
+            fontPath: $this->fontPath,
+            fontColor: $this->fontColor,
+            align: 'center',
+            valign: 'bottom',
+        );
+        return $this;
+    }
+
+    /**
      * creates and saves the image
      *
      * @param   string  $path
@@ -178,7 +267,9 @@ trait PlotterTrait
         $this->plotScales();
         $this->plotLorenzCurve();
         $this->plotCompleteEqualityLine();
-        //$this->plotLabels();
+        $this->plotLabelX();
+        $this->plotLabelY();
+        $this->plotCaption();
         $this->canvas->save($path);
         return $this;
     }

@@ -21,6 +21,19 @@ trait AttributesTrait
 
     protected string|null $canvasBackgroundColor;
 
+    protected string $fontPath;
+    protected int $fontSize;
+    protected string $fontColor;
+    protected string $labelX;
+    protected int $labelXOffsetX;
+    protected int $labelXOffsetY;
+    protected string $labelY;
+    protected int $labelYOffsetX;
+    protected int $labelYOffsetY;
+    protected string $caption;
+    protected int $captionOffsetX;
+    protected int $captionOffsetY;
+
     /**
      * returns the canvas size
      *
@@ -110,6 +123,60 @@ trait AttributesTrait
         if ($this->isColorCode($backgroundColor) || is_null($backgroundColor)) {
             $this->plotarea['backgroundColor'] = $backgroundColor;
         }
+        return $this;
+    }
+
+    /**
+     * sets label of X
+     * @param   string  $label
+     * @param   int     $offsetX = 0
+     * @param   int     $offsetY = 0
+     * @return  self
+     */
+    public function labelX(
+        string $label,
+        int $offsetX = 0,
+        int $offsetY = 0,
+    ) {
+        $this->labelX = $label;
+        $this->labelXOffsetX = $offsetX;
+        $this->labelXOffsetY = $offsetY;
+        return $this;
+    }
+
+    /**
+     * sets label of Y
+     * @param   string  $label
+     * @param   int     $offsetX = 0
+     * @param   int     $offsetY = 0
+     * @return  self
+     */
+    public function labelY(
+        string $label,
+        int $offsetX = 0,
+        int $offsetY = 0,
+    ) {
+        $this->labelY = $label;
+        $this->labelYOffsetX = $offsetX;
+        $this->labelYOffsetY = $offsetY;
+        return $this;
+    }
+
+    /**
+     * sets caption
+     * @param   string  $caption
+     * @param   int     $offsetX = 0
+     * @param   int     $offsetY = 0
+     * @return  self
+     */
+    public function caption(
+        string $caption,
+        int $offsetX = 0,
+        int $offsetY = 0,
+    ) {
+        $this->caption = $caption;
+        $this->captionOffsetX = $offsetX;
+        $this->captionOffsetY = $offsetY;
         return $this;
     }
 }

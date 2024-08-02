@@ -9,3 +9,15 @@ props:
         y: [0, 1]
     plotarea: []
     canvasBackgroundColor: '#ffffff'
+    fontPath: 'fonts/ipaexg.ttf'
+    fontSize: 16
+    fontColor: '#333333'
+    labelX: ''
+    labelXOffsetX: 0
+    labelXOffsetY: 0
+    labelY: ''
+    labelYOffsetX: 0
+    labelYOffsetY: 0
+    caption: ''
+    captionOffsetX: 0
+    captionOffsetY: 0
