@@ -4,6 +4,7 @@ namespace Macocci7\PhpLorenzCurve;
 
 use Macocci7\PhpFrequencyTable\FrequencyTable;
 use Macocci7\PhpLorenzCurve\Helpers\Config;
+use Nette\Neon\Neon;
 
 class LorenzCurve
 {
