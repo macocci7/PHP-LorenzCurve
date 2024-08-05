@@ -69,14 +69,25 @@ trait PlotterTrait
     protected function plotAxis(): void
     {
         list($offsetX, $offsetY) = $this->plotarea['offset'];
-        $coords = $this->transformer->getCoords([[0, 0], [1, 0]]);
+        $coords = $this->transformer->getCoords([[0, 0], [1, 0], [0, 1]]);
+        // x-axis
         $this->canvas->drawLine(
             x1: $coords[0][0] + $offsetX,
             y1: $coords[0][1] + $offsetY,
             x2: $coords[1][0] + $offsetX,
             y2: $coords[1][1] + $offsetY,
+            width: $this->axisWidth,
+            color: $this->axisColor,
         );
-        $this->canvas->plotAxisY(); // @phpstan-ignore-line
+        // y-axis
+        $this->canvas->drawLine(
+            x1: $coords[0][0] + $offsetX,
+            y1: $coords[0][1] + $offsetY,
+            x2: $coords[2][0] + $offsetX,
+            y2: $coords[2][1] + $offsetY,
+            width: $this->axisWidth,
+            color: $this->axisColor,
+        );
     }
 
     /**
@@ -84,8 +95,18 @@ trait PlotterTrait
      */
     protected function plotScales(): void
     {
-        $this->canvas->plotScaleX(0.2); // @phpstan-ignore-line
-        $this->canvas->plotScaleY(0.2); // @phpstan-ignore-line
+        $this->canvas->plotScaleX( // @phpstan-ignore-line
+            interval: 0.2,
+            width: $this->scaleWidth,
+            length: $this->scaleLength * 2,
+            color: $this->scaleColor,
+        );
+        $this->canvas->plotScaleY( // @phpstan-ignore-line
+            interval: 0.2,
+            width: $this->scaleWidth,
+            length: $this->scaleLength * 2,
+            color: $this->scaleColor,
+        );
         list($offsetX, $offsetY) = $this->plotarea['offset'];
         $i = 0;
         while ($i <= 1) {
@@ -98,6 +119,9 @@ trait PlotterTrait
                 text: (string) $i,
                 x: $points[0][0] + $offsetX,
                 y: $points[0][1] + $offsetY + 8,
+                fontSize: $this->scaleFontSize,
+                fontPath: $this->scaleFontPath,
+                fontColor: $this->scaleFontColor,
                 align: 'center',
                 valign: 'top',
             );
@@ -106,6 +130,9 @@ trait PlotterTrait
                 text: (string) $i,
                 x: $points[1][0] + $offsetX - 8,
                 y: $points[1][1] + $offsetY,
+                fontSize: $this->scaleFontSize,
+                fontPath: $this->scaleFontPath,
+                fontColor: $this->scaleFontColor,
                 align: 'right',
                 valign: 'middle',
             );
@@ -119,7 +146,15 @@ trait PlotterTrait
     protected function plotCompleteEqualityLine(): void
     {
         // @phpstan-ignore-next-line
-        $this->canvas->plotLine(0, 0, 1, 1, 1, '#999999', dash: [4, 4]);
+        $this->canvas->plotLine(
+            x1: 0,
+            y1: 0,
+            x2: 1,
+            y2: 1,
+            width: $this->completeEqualityLineWidth,
+            color: $this->completeEqualityLineColor,
+            dash: $this->completeEqualityLineDash,
+        );
     }
 
     /**
@@ -133,7 +168,7 @@ trait PlotterTrait
         if (count($points) > 2) {
             $this->canvas->plotPolygon( // @phpstan-ignore-line
                 points: $points,
-                backgroundColor: '#ffcc00',
+                backgroundColor: $this->lorenzCurveBackgroundColor,
                 borderWidth: 0,
                 borderColor: null,
             );
@@ -142,7 +177,7 @@ trait PlotterTrait
             x: 0,
             y: 0,
             radius: 4,
-            backgroundColor: '#0000ff',
+            backgroundColor: $this->lorenzCurveColor,
             borderWidth: 0,
         );
         for ($i = 0; $i < $count; $i++) {
@@ -151,14 +186,14 @@ trait PlotterTrait
                 y1: $points[$i - 1][1],
                 x2: $points[$i][0],
                 y2: $points[$i][1],
-                width: 2,
-                color: '#0000ff',
+                width: $this->lorenzCurveWidth,
+                color: $this->lorenzCurveColor,
             );
             $this->canvas->plotPerfectCircle( // @phpstan-ignore-line
                 x: $points[$i][0],
                 y: $points[$i][1],
                 radius: 4,
-                backgroundColor: '#0000ff',
+                backgroundColor: $this->lorenzCurveColor,
                 borderWidth: 0,
             );
         }
@@ -263,10 +298,10 @@ trait PlotterTrait
     {
         $this->setProps();
         $this->plotGrids();
-        $this->plotAxis();
         $this->plotScales();
         $this->plotLorenzCurve();
         $this->plotCompleteEqualityLine();
+        $this->plotAxis();
         $this->plotLabelX();
         $this->plotLabelY();
         $this->plotCaption();
