@@ -9,6 +9,23 @@ props:
         y: [0, 1]
     plotarea: []
     canvasBackgroundColor: '#ffffff'
+    showGrid: false
+    gridWidth: 1
+    gridColor: '#cccccc'
+    axisWidth: 1
+    axisColor: '#000000'
+    scaleWidth: 1
+    scaleLength: 3
+    scaleColor: '#000000'
+    scaleFontSize: 16
+    scaleFontPath: 'fonts/ipaexg.ttf'
+    scaleFontColor: '#000000'
+    lorenzCurveWidth: 2
+    lorenzCurveColor: '#0000ff'
+    lorenzCurveBackgroundColor: '#ffcc00'
+    completeEqualityLineWidth: 1
+    completeEqualityLineColor: '#999999'
+    completeEqualityLineDash: [4, 4]
     fontPath: 'fonts/ipaexg.ttf'
     fontSize: 16
     fontColor: '#333333'
@@ -21,3 +38,70 @@ props:
     caption: ''
     captionOffsetX: 0
     captionOffsetY: 0
+    validConfig:
+        canvasSize:
+            type: array
+        viewport:
+            type: array
+        plotarea:
+            type: array
+        canvasBackgroundColor:
+            type: colorCode|null
+        showGrid:
+            type: bool
+        gridWidth:
+            type: int
+        gridColor:
+            type: colorCode|null
+        axisWidth:
+            type: int
+        axisColor:
+            type: colorCode
+        scaleWidth:
+            type: int
+        scaleLength:
+            type: int
+        scaleColor:
+            type: colorCode|null
+        scaleFontSize:
+            type: int
+        scaleFontPath:
+            type: string
+        scaleFontColor:
+            type: colorCode
+        lorenzCurveWidth:
+            type: int
+        lorenzCurveColor:
+            type: colorCode
+        lorenzCurveBackgroundColor:
+            type: colorCode|null
+        completeEqualityLineWidth:
+            type: int
+        completeEqualityLineColor:
+            type: colorCode|null
+        completeEqualityLineDash:
+            type: array
+        fontPath:
+            type: string
+        fontSize:
+            type: int
+        fontColor:
+            type: colorCode|null
+        labelX:
+            type: string
+        labelXOffsetX:
+            type: int
+        labelXOffsetY:
+            type: int
+        labelY:
+            type: string
+        labelYOffsetX:
+            type: int
+        labelYOffsetY:
+            type: int
+        caption:
+            type: string
+        captionOffsetX:
+            type: int
+        captionOffsetY:
+            type: int

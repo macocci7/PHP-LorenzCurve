@@ -15,6 +15,17 @@ A PHP Library to draw a Lorenz Curve.
 - [3. Requirements](#3-requirements)
 - [4. Installation](#4-installation)
 - [5. Usage](#5-usage)
+    - [5.1. Basic Usage](#51-basic-usage)
+    - [5.2. Adjusting the Appearance](#52-adjusting-the-appearance)
+        - [5.2.1. Drawing Grid Lines](#521-drawing-grid-lines)
+        - [5.2.2. Drawing an Upward Convex Curve](#522-drawing-an-upward-convex-curve)
+        - [5.2.3. Setting the Image Size](#523-setting-the-image-size)
+        - [5.2.4. Setting the Attributes of Plotarea](#524-setting-the-attributes-of-plotarea)
+        - [5.2.5. Setting Caption and Labels](#525-setting-caption-and-labels)
+        - [5.2.6. Setting Attributes with Array](#526-setting-attributes-with-array)
+        - [5.2.7. Setting Attributes with Neon File](#527-setting-attributes-with-neon-file)
+        - [5.2.8. Customisable Attributes](#528-customisable-attributes)
+    - [5.3. Gini's Coefficient](#53-ginis-coefficient)
 - [6. Examples](#6-examples)
 - [7. LICENSE](#7-license)
 
@@ -206,6 +217,129 @@ This code results in as below:
 
 <img src="examples/img/CaptionLabels.png" width="300" />
 
+#### 5.2.6. Setting Attributes with Array
+
+You can set attributes with the `config()` method passing array as an argument.
+
+```php
+$lc
+    ->setData([1, 5, 10, 15, 20])
+    ->setClassRange(5)
+    ->config([
+        'canvasBackgroundColor' => '#3333cc',
+        'showGrid' => true,
+        'gridWidth' => 1,
+        'gridColor' => '#0066ff',
+        'axisWidth' => 3,
+        'axisColor' => '#ffffff',
+        'scaleWidth' => 2,
+        'scaleLength' => 6,
+        'scaleColor' => '#ffffff',
+        'scaleFontSize' => 14,
+        'scaleFontColor' => '#ffffff',
+        'lorenzCurveWidth' => 1,
+        'lorenzCurveColor' => '#ffff00',
+        'lorenzCurveBackgroundColor' => null, // transparent
+        'completeEqualityLineWidth' => 3,
+        'completeEqualityLineColor' => '#ffffff',
+        'completeEqualityLineDash' => [8, 8],
+        'fontColor' => '#ffffff',
+        'caption' => 'Config From Array',
+    ])
+    ->create('img/ConfigFromArray.png');
+```
+
+This code results in as below:
+
+<img src="examples/img/ConfigFromArray.png" width="300" />
+
+See more: [Customizable Attributes](#528-customisable-attributes)
+
+#### 5.2.7. Setting Attributes with Neon File
+
+You can set attributes with `config()` method passing the neon file path as an argument.
+
+First, create a Neon File.
+
+```neon
+canvasBackgroundColor: '#3333cc'
+showGrid: true
+gridWidth: 1
+gridColor: '#0066ff'
+axisWidth: 3
+axisColor: '#ffffff'
+scaleWidth: 2
+scaleLength: 6
+scaleColor: '#ffffff'
+scaleFontSize: 14
+scaleFontColor: '#ffffff'
+lorenzCurveWidth: 1
+lorenzCurveColor: '#ffff00'
+lorenzCurveBackgroundColor:
+completeEqualityLineWidth: 3
+completeEqualityLineColor: '#ffffff'
+completeEqualityLineDash: [8, 8]
+fontColor: '#ffffff'
+caption: 'Config From File'
+```
+
+Second, specify the path of the neon file as an argument of the `config()` method.
+
+```php
+$lc
+    ->setData([1, 5, 10, 15, 20])
+    ->setClassRange(5)
+    ->config('ConfigFromFile.neon')
+    ->create('img/ConfigFromFile.png');
+```
+
+This code results in as below:
+
+<img src="examples/img/ConfigFromFile.png" width="300" />
+
+See more: [Customizable Attributes](#528-customisable-attributes)
+
+#### 5.2.8. Customisable Attributes
+
+|attribute|type|default|example|description|
+|:---|:---|:---:|:---:|:---|
+|canvasSize['width']|int|400|450|image width|
+|canvasSize['height']|int|300|400|image height|
+|canvasBackgroundColor|string|'#ffffff'|'#0000ff'|background color of the image|
+|plotarea['offset']|int[]|10% of the image size|[40, 50]|offset of the plotarea|
+|plotarea['width']|int|80% of the image size|500|plotarea width|
+|plotarea['height']|int|70% of the image size|400|plotarea height|
+|plotarea['backgroundColor']|string|`null`|'#cccccc'|background color of  the plotarea|
+|showGrid|bool|`false`|`true`|whether to show grid lines|
+|gridWidth|int|1|2|grid line width|
+|gridColor|string|'#cccccc'|'#0099ff'|grid line color|
+|axisWidth|int|2|3|axis width|
+|axisColor|string|'#000000'|'#ffffff'|axis color|
+|scaleWidth|int|1|2|scale width|
+|scaleLength|int|3|6|scale length|
+|scaleColor|string|'#000000'|'#ffffff'|scale color|
+|scaleFontSize|int|16|14|scale font size|
+|scaleFontPath|string|'fonts/ipaexg.ttf'|'fonts/myfont.ttf'|scale font path|
+|scaleFontColor|string|'#000000'|'#ffffff'|scale font color|
+|lorenzCurveWidth|int|2|1|Lorenz Curve width|
+|lorenzCurveColor|string|'#0000ff'|'#ffff00'|Lorenz Curve Color|
+|lorenzCurveBackgroundColor|string|'#ffcc00'|`null`|Lorenz Curve background color|
+|completeEqualityLineWidth|int|1|2|complete equality line width|
+|completeEqualityLineColor|string|'#999999'|'#ffffff'|complete equality line color|
+|completeEqualityLineDash|int[]|[4, 4]|[8, 8]|complete equality line dash pattern (solid and blank)|
+|fontPath|string|'fonts/ipaexg.ttf'|'fonts/myfont.ttf'|font path|
+|fontSize|int|16|14|font size|
+|fontColor|string|'#333333'|'#ffffff'|font color|
+|labelX|string|''|'Cumulative Relative Frequency'|x label|
+|labelXOffsetX|int|0|-10|x-offset of x label|
+|labelXOffsetY|int|0|10|y-offset of x label|
+|labelY|string|''|'Cumulative Relative Subtotal'|y label|
+|labelYOffsetX|int|0|-10|x-offset of y label|
+|labelYOffsetY|int|0|-10|y-offset of y label|
+|caption|string|''|'CAPTION'|caption|
+|captionOffsetX|int|0|10|x-offset of caption|
+|captionOffsetY|int|0|-10|y-offset of caption|
+
 ### 5.3. Gini's Coefficient
 
 You can get the Gini's Coefficient with `getGinisCoefficient()` method without generating an image.
@@ -250,6 +384,14 @@ double(0.37647058823529)
 - [CaptionLabels.php](examples/CaptionLabels.php) >> results in:
 
     <img src="examples/img/CaptionLabels.png" width="300" />
+
+- [ConfigFromArray.php](examples/ConfigFromArray.php) >> results in:
+
+    <img src="examples/img/ConfigFromArray.png" width="300" />
+
+- [ConfigFromFile.php](examples/ConfigFromFile.php) with [ConfigFromFile.neon](examples/ConfigFromFile.neon) >> results in:
+
+    <img src="examples/img/ConfigFromFile.png" width="300" />
 
 - [GinisCoefficient.php](examples/GinisCoefficient.php) >> results in:
 

@@ -21,6 +21,23 @@ trait AttributesTrait
 
     protected string|null $canvasBackgroundColor;
 
+    protected int $axisWidth;
+    protected string $axisColor;
+    protected int $scaleWidth;
+    protected int $scaleLength;
+    protected string $scaleColor;
+    protected int $scaleFontSize;
+    protected string $scaleFontPath;
+    protected string $scaleFontColor;
+    protected int $completeEqualityLineWidth;
+    protected string $completeEqualityLineColor;
+    /**
+     * @var int[]   $completeEqualityLineDash
+     */
+    protected array $completeEqualityLineDash;
+    protected int $lorenzCurveWidth;
+    protected string $lorenzCurveColor;
+    protected string|null $lorenzCurveBackgroundColor;
     protected string $fontPath;
     protected int $fontSize;
     protected string $fontColor;
@@ -33,6 +50,10 @@ trait AttributesTrait
     protected string $caption;
     protected int $captionOffsetX;
     protected int $captionOffsetY;
+    /**
+     * @var array<string, array<string, string>>    $validConfig
+     */
+    protected array $validConfig;
 
     /**
      * returns the canvas size
@@ -93,6 +114,7 @@ trait AttributesTrait
                 $canvas['height'] * $rateY
             );
         }
+        $plotarea['backgroundColor'] = null;
         $this->plotarea = $plotarea;
     }
 
