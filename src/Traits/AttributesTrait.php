@@ -114,7 +114,9 @@ trait AttributesTrait
                 $canvas['height'] * $rateY
             );
         }
-        $plotarea['backgroundColor'] = null;
+        if (!array_key_exists('backgroundColor', $plotarea)) {
+            $plotarea['backgroundColor'] = null;
+        }
         $this->plotarea = $plotarea;
     }
 
