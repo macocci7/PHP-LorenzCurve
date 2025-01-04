@@ -32,7 +32,12 @@ A PHP Library to draw a Lorenz Curve.
 ## 3. Requirements
 
 - PHP 8.1 or later
-- Imagick PHP Extention
+- Imagick PHP Extension
+
+    Check with commands:
+    ```php
+    (php -m; php -i) | grep imagick
+    ```
 - Composer
 
 ## 4. Installation
@@ -356,7 +361,7 @@ var_dump(
 This results in as below.
 
 ```bash
-double(0.37647058823529)
+float(0.3764705882352942)
 ```
 
 ## 6. Examples
@@ -396,7 +401,7 @@ double(0.37647058823529)
 - [GinisCoefficient.php](examples/GinisCoefficient.php) >> results in:
 
     ```bash
-    double(0.37647058823529)
+    float(0.3764705882352942)
     ```
 
 - [GinisCoefficient0.php](examples/GinisCoefficient0.php) >> results in:
@@ -406,7 +411,7 @@ double(0.37647058823529)
     ▼Gini's Coefficient:
 
     ```bash
-    double(0)
+    float(0)
     ```
 
 - [GinisCoefficientAlmost1.php](examples/GinisCoefficientAlmost1.php) >> results in:
@@ -416,7 +421,7 @@ double(0.37647058823529)
     ▼Gini's Coefficient:
 
     ```bash
-    double(0.99800399201597)
+    float(0.998003992015968)
     ```
 
 - [GinisCoefficient1.php](examples/GinisCoefficient1.php) >> results in:
@@ -426,7 +431,7 @@ double(0.37647058823529)
     ▼Gini's Coefficient:
 
     ```bash
-    double(1)
+    float(1)
     ```
 
 ## 7. LICENSE
@@ -435,4 +440,4 @@ double(0.37647058823529)
 
 ***
 
-*Copyright 2024 macocci7*
+Copyright 2024-2025 macocci7.
