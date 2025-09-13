@@ -8,6 +8,8 @@ A PHP Library to draw a Lorenz Curve.
 
 <img src="examples/img/BasicUsage.png" width="300" />
 
+Of course, you can also obtain only parsed data such as coordinates for each point and the Gini's coefficient without generating an image.
+
 ## 2. Contents
 
 - [1. Features](#1-features)
@@ -26,6 +28,7 @@ A PHP Library to draw a Lorenz Curve.
         - [5.2.7. Setting Attributes with Neon File](#527-setting-attributes-with-neon-file)
         - [5.2.8. Customisable Attributes](#528-customisable-attributes)
     - [5.3. Gini's Coefficient](#53-ginis-coefficient)
+    - [5.4. Getting Parsed Data](#54-getting-parsed-data)
 - [6. Examples](#6-examples)
 - [7. LICENSE](#7-license)
 
@@ -364,6 +367,86 @@ This results in as below.
 float(0.3764705882352942)
 ```
 
+### 5.4. Getting Parsed Data
+
+You can get only parsed data with `parse()` method without generating an image.
+
+```php
+var_dump(
+    $lc
+    ->setData([1, 5, 10, 15, 20])
+    ->setClassRange(5)
+    ->parse()
+);
+```
+
+This results in as below.
+
+```bash
+array(3) {
+  'data' =>
+  array(5) {
+    [0] =>
+    int(1)
+    [1] =>
+    int(5)
+    [2] =>
+    int(10)
+    [3] =>
+    int(15)
+    [4] =>
+    int(20)
+  }
+  'points' =>
+  array(6) {
+    [0] =>
+    array(2) {
+      [0] =>
+      int(0)
+      [1] =>
+      int(0)
+    }
+    [1] =>
+    array(2) {
+      [0] =>
+      double(0.2)
+      [1] =>
+      double(0.0196078431372549)
+    }
+    [2] =>
+    array(2) {
+      [0] =>
+      double(0.4)
+      [1] =>
+      double(0.11764705882352941)
+    }
+    [3] =>
+    array(2) {
+      [0] =>
+      double(0.6000000000000001)
+      [1] =>
+      double(0.3137254901960784)
+    }
+    [4] =>
+    array(2) {
+      [0] =>
+      double(0.8)
+      [1] =>
+      double(0.607843137254902)
+    }
+    [5] =>
+    array(2) {
+      [0] =>
+      double(1)
+      [1] =>
+      double(1)
+    }
+  }
+  'ginis_coefficient' =>
+  double(0.3764705882352942)
+}
+```
+
 ## 6. Examples
 
 - [BasicUsage.php](examples/BasicUsage.php) >> results in:
@@ -432,6 +515,73 @@ float(0.3764705882352942)
 
     ```bash
     float(1)
+    ```
+
+- [Parse.php](examples/Parse.php) >> results in:
+
+    ```bash
+    array(3) {
+    'data' =>
+    array(5) {
+        [0] =>
+        int(1)
+        [1] =>
+        int(5)
+        [2] =>
+        int(10)
+        [3] =>
+        int(15)
+        [4] =>
+        int(20)
+    }
+    'points' =>
+    array(6) {
+        [0] =>
+        array(2) {
+        [0] =>
+        int(0)
+        [1] =>
+        int(0)
+        }
+        [1] =>
+        array(2) {
+        [0] =>
+        double(0.2)
+        [1] =>
+        double(0.0196078431372549)
+        }
+        [2] =>
+        array(2) {
+        [0] =>
+        double(0.4)
+        [1] =>
+        double(0.11764705882352941)
+        }
+        [3] =>
+        array(2) {
+        [0] =>
+        double(0.6000000000000001)
+        [1] =>
+        double(0.3137254901960784)
+        }
+        [4] =>
+        array(2) {
+        [0] =>
+        double(0.8)
+        [1] =>
+        double(0.607843137254902)
+        }
+        [5] =>
+        array(2) {
+        [0] =>
+        double(1)
+        [1] =>
+        double(1)
+        }
+    }
+    'ginis_coefficient' =>
+    double(0.3764705882352942)
+    }
     ```
 
 ## 7. LICENSE

@@ -18,12 +18,12 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.3
+          php-version: 8.4
           coverage: xdebug
           tools: composer:v2
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -33,7 +33,7 @@ jobs:
       - name: Validate Composer JSON
         run: composer validate
 
-      - name: Get Version From Comopser JSON
+      - name: Get Version From Composer JSON
         id: new-version
         run: |
           echo version=$(cat composer.json | grep version | head -1 | grep -Po '\d+\.\d+\.\d+') >> $GITHUB_OUTPUT

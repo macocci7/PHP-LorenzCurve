@@ -232,4 +232,37 @@ final class DataTraitTest extends TestCase
             )
         );
     }
+
+    public function test_parse_can_work_correctly(): void
+    {
+        $data = [1, 5, 10, 15, 20];
+        $classRange = 5;
+        $expected = [
+            "data" => $data,
+            "points" => [
+                [0, 0],
+                [0.2, 0.0196078431372549],
+                [0.4, 0.11764705882352941],
+                [0.6000000000000001, 0.3137254901960784],
+                [0.8, 0.607843137254902],
+                [1.0, 1.0],
+            ],
+            "ginis_coefficient" => 0.3764705882352942,
+        ];
+        $o = new class ($data, $classRange) {
+            use DataTrait;
+
+            protected FrequencyTable $ft;
+
+            public function __construct($data, $classRange)
+            {
+                $this->ft = new FrequencyTable();
+                $this->ft->setData($data);
+                $this->ft->setClassRange($classRange);
+                $this->parsed = $this->ft->parse();
+            }
+        };
+        $parsed = $o->parse();
+        $this->assertSame($expected, $parsed);
+    }
 }
