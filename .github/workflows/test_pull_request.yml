@@ -11,11 +11,11 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.3
+          php-version: 8.4
           tools: composer:v2
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -25,7 +25,7 @@ jobs:
       - name: Validate Composer JSON
         run: composer validate
 
-      - name: Get Version From Comopser JSON
+      - name: Get Version From Composer JSON
         id: new-version
         run: |
           echo version=$(cat composer.json | grep version | head -1 | grep -Po '\d+\.\d+\.\d+') >> $GITHUB_OUTPUT
@@ -63,12 +63,12 @@ jobs:
           tools: composer:v2
 
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: '20.x'
+          node-version: '24.x'
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -87,11 +87,6 @@ jobs:
 
       - name: Neon Lint
         run: ./vendor/nette/neon/bin/neon-lint conf
-
-      #- name: PHP MD
-      #  run: |
-      #    ./vendor/bin/phpmd --version
-      #    ./vendor/bin/phpmd ./src/ ./examples/ text phpmd.xml
 
       - name: PHP Code Sniffer
         run: |
@@ -115,7 +110,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['8.3']
+        php: ['8.4']
 
     steps:
       - name: Set up PHP
@@ -126,20 +121,20 @@ jobs:
           tools: composer:v2
 
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: '20.x'
+          node-version: '24.x'
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
-      - name: Run Composer
+      - name: Run Composer Install
         run: composer install --no-interaction
 
       - name: Update PHPUnit for Code Coverage
-        run: composer require phpunit/phpunit:^10.5 sebastian/version:* --with-all-dependencies
+        run: composer require phpunit/phpunit:^12 sebastian/version:* --with-all-dependencies
 
       - name: PHP Lint
         run: ./vendor/bin/parallel-lint src tests examples

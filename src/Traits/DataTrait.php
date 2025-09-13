@@ -125,4 +125,23 @@ trait DataTrait
         return (($x1 - $y1) ** 2 + ($x2 - $y2) ** 2) * abs($x2 - $x1)
             / (2 * (abs($x1 - $y1) + abs($x2 - $y2)));
     }
+
+    /**
+     * parses data and returns the result
+     *
+     * @return  array<string, mixed>
+     */
+    public function parse(): array
+    {
+        $this->parsed = $this->ft->parse();
+        $points = [
+            [0, 0],
+            ...$this->getPoints()
+        ];
+        return [
+            "data" => $this->getData(),
+            "points" => array_values($points),
+            "ginis_coefficient" => $ginisCoefficient = $this->getGinisCoefficient(),
+        ];
+    }
 }
