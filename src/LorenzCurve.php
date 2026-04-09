@@ -42,9 +42,8 @@ class LorenzCurve
     /**
      * set config from specified resource
      * @param   string|mixed[]  $configResource
-     * @return  self
      */
-    public function config(string|array $configResource)
+    public function config(string|array $configResource): self
     {
         if (is_string($configResource)) {
             $conf = $this->configFromFile($configResource);
@@ -59,11 +58,10 @@ class LorenzCurve
 
     /**
      * returns valid config items from specified file
-     * @param   string  $path
      * @return  mixed[]
      * @thrown  \Exception
      */
-    private function configFromFile(string $path)
+    private function configFromFile(string $path): array
     {
         if (strlen($path) === 0) {
             throw new \Exception("Specify valid filename.");
@@ -81,7 +79,7 @@ class LorenzCurve
      * @return  mixed[]
      * @thrown  \Exception
      */
-    private function configFromArray(array $content)
+    private function configFromArray(array $content): array
     {
         $conf = [];
         foreach ($this->validConfig as $key => $def) {

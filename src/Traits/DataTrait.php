@@ -17,9 +17,8 @@ trait DataTrait
      * sets data
      *
      * @param   array<int|string, int|float>    $data
-     * @return  self
      */
-    public function setData(array $data)
+    public function setData(array $data): self
     {
         $this->ft->setData($data);
         return $this;
@@ -30,18 +29,15 @@ trait DataTrait
      *
      * @return  array<int|string, int|float>
      */
-    public function getData()
+    public function getData(): array
     {
         return $this->ft->getData();
     }
 
     /**
      * sets class range
-     *
-     * @param   int|float   $classRange
-     * @return  self
      */
-    public function setClassRange(int|float $classRange)
+    public function setClassRange(int|float $classRange): self
     {
         $this->ft->setClassRange($classRange);
         return $this;
@@ -49,10 +45,8 @@ trait DataTrait
 
     /**
      * sets list of classes in reverse order
-     *
-     * @return self
      */
-    public function reverseClasses()
+    public function reverseClasses(): self
     {
         $this->ft->reverseClasses();
         return $this;
@@ -63,7 +57,7 @@ trait DataTrait
      *
      * @return  array<int, array<int, int|float>>
      */
-    public function getPoints()
+    public function getPoints(): array
     {
         if (count($this->ft->getData()) === 1) {
             return [[1, 0], [1, 1]];
@@ -85,10 +79,8 @@ trait DataTrait
 
     /**
      * returns the Gini's Coefficient
-     *
-     * @return  int|float
      */
-    public function getGinisCoefficient()
+    public function getGinisCoefficient(): int|float
     {
         $this->parsed = $this->ft->parse();
         $points = $this->getPoints();
@@ -103,14 +95,14 @@ trait DataTrait
 
     /**
      * returns the area
+     *
      * @param   int[]   $p1
      * @param   int[]   $p2
-     * @return  int|float
      */
     protected function getArea(
         array $p1,
         array $p2,
-    ) {
+    ): int|float {
         list($x1, $y1) = $p1;
         list($x2, $y2) = $p2;
         if (($x1 - $y1) == 0 && ($x2 - $y2) == 0) {

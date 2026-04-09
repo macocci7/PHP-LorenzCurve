@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Macocci7\PhpLorenzCurve\Traits;
+namespace Macocci7\PhpLorenzCurve\Tests\Traits;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -15,7 +15,7 @@ final class DataTraitTest extends TestCase
     // phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     // phpcs:disable Generic.Files.LineLength.TooLong
 
-    private $epsilon = 0.00001;
+    private float $epsilon = 0.00001;
 
     private function isAlmostSame(float|null $a, float|null $b): bool
     {

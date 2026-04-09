@@ -34,14 +34,20 @@ Of course, you can also obtain only parsed data such as coordinates for each poi
 
 ## 3. Requirements
 
-- PHP 8.1 or later
+- PHP 8.3 or later
 - Imagick PHP Extension
 
     Check with commands:
     ```php
     (php -m; php -i) | grep imagick
     ```
-- Composer
+- Mbstring PHP Extension
+
+    Check with commands:
+    ```php
+    (php -m; php -i) | grep mbstring
+    ```
+- [Composer](https://getcomposer.org/)
 
 ## 4. Installation
 
@@ -587,7 +593,3 @@ array(3) {
 ## 7. LICENSE
 
 [MIT](LICENSE)
-
-***
-
-Copyright 2024-2025 macocci7.

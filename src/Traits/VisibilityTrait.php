@@ -11,12 +11,9 @@ trait VisibilityTrait
     /**
      * setsf attributes of the grid
      *
-     * @param   int         $width
-     * @param   string|null $color
-     * @return  self
      * @thrown  \Exception
      */
-    public function grid(int $width, string|null $color = null)
+    public function grid(int $width, string|null $color = null): self
     {
         if ($width < 1) {
             throw new \Exception("width must be more than zero.");

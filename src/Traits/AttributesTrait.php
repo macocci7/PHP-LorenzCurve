@@ -60,7 +60,7 @@ trait AttributesTrait
      *
      * @return  array<string, int>
      */
-    public function size()
+    public function size(): array
     {
         return $this->canvasSize;
     }
@@ -68,12 +68,9 @@ trait AttributesTrait
     /**
      * sets the canvas size
      *
-     * @param   int $width
-     * @param   int $height
-     * @return  self
      * @thrown  \Exception
      */
-    public function resize(int $width, int $height)
+    public function resize(int $width, int $height): self
     {
         if ($width < 1 || $height < 1) {
             throw new \Exception("invalid canvas size ({$width}, {$height}).");
@@ -124,17 +121,13 @@ trait AttributesTrait
      * sets plotarea
      *
      * @param   int[]       $offset = []
-     * @param   int         $width = 0
-     * @param   int         $height = 0
-     * @param   string|null $backgroundColor = null
-     * @return  self
      */
     public function plotarea(
         array $offset = [],
         int $width = 0,
         int $height = 0,
         string|null $backgroundColor = null,
-    ) {
+    ): self {
         if ($offset !== []) {
             $this->plotarea['offset'] = $offset;
         }
@@ -152,16 +145,12 @@ trait AttributesTrait
 
     /**
      * sets label of X
-     * @param   string  $label
-     * @param   int     $offsetX = 0
-     * @param   int     $offsetY = 0
-     * @return  self
      */
     public function labelX(
         string $label,
         int $offsetX = 0,
         int $offsetY = 0,
-    ) {
+    ): self {
         $this->labelX = $label;
         $this->labelXOffsetX = $offsetX;
         $this->labelXOffsetY = $offsetY;
@@ -170,16 +159,12 @@ trait AttributesTrait
 
     /**
      * sets label of Y
-     * @param   string  $label
-     * @param   int     $offsetX = 0
-     * @param   int     $offsetY = 0
-     * @return  self
      */
     public function labelY(
         string $label,
         int $offsetX = 0,
         int $offsetY = 0,
-    ) {
+    ): self {
         $this->labelY = $label;
         $this->labelYOffsetX = $offsetX;
         $this->labelYOffsetY = $offsetY;
@@ -188,16 +173,12 @@ trait AttributesTrait
 
     /**
      * sets caption
-     * @param   string  $caption
-     * @param   int     $offsetX = 0
-     * @param   int     $offsetY = 0
-     * @return  self
      */
     public function caption(
         string $caption,
         int $offsetX = 0,
         int $offsetY = 0,
-    ) {
+    ): self {
         $this->caption = $caption;
         $this->captionOffsetX = $offsetX;
         $this->captionOffsetY = $offsetY;
