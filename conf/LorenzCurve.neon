@@ -18,7 +18,7 @@ props:
     scaleLength: 3
     scaleColor: '#000000'
     scaleFontSize: 16
-    scaleFontPath: 'fonts/ipaexg.ttf'
+    #scaleFontPath: 'fonts/ipaexg.ttf'
     scaleFontColor: '#000000'
     lorenzCurveWidth: 2
     lorenzCurveColor: '#0000ff'
@@ -26,7 +26,7 @@ props:
     completeEqualityLineWidth: 1
     completeEqualityLineColor: '#999999'
     completeEqualityLineDash: [4, 4]
-    fontPath: 'fonts/ipaexg.ttf'
+    #fontPath: 'Fonts/ipaexg.ttf'
     fontSize: 16
     fontColor: '#333333'
     labelX: ''

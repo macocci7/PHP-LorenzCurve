@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Macocci7\PhpLorenzCurve\Traits;
+namespace Macocci7\PhpLorenzCurve\Tests\Traits;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;

@@ -6,20 +6,16 @@ trait JudgeTrait
 {
     /**
      * judges if the param is number or not
-     * @param   mixed   $value
-     * @return  bool
      */
-    public static function isNumber(mixed $value)
+    public static function isNumber(mixed $value): bool
     {
         return is_int($value) || is_float($value);
     }
 
     /**
      * judges if the param is valid or not
-     * @param   mixed  $data
-     * @return  bool
      */
-    public static function isSettableData(mixed $data)
+    public static function isSettableData(mixed $data): bool
     {
         if (!is_array($data)) {
             return false;
@@ -37,8 +33,6 @@ trait JudgeTrait
 
     /**
      * judges if the param is in '#rrggbb' format or not
-     * @param   mixed  $item
-     * @return  bool
      */
     public static function isColorCode(mixed $item): bool
     {

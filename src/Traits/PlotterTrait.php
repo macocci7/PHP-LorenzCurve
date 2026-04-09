@@ -120,7 +120,7 @@ trait PlotterTrait
                 x: $points[0][0] + $offsetX,
                 y: $points[0][1] + $offsetY + 8,
                 fontSize: $this->scaleFontSize,
-                fontPath: $this->scaleFontPath,
+                fontPath: $this->scaleFontPath ?? "",
                 fontColor: $this->scaleFontColor,
                 align: 'center',
                 valign: 'top',
@@ -131,7 +131,7 @@ trait PlotterTrait
                 x: $points[1][0] + $offsetX - 8,
                 y: $points[1][1] + $offsetY,
                 fontSize: $this->scaleFontSize,
-                fontPath: $this->scaleFontPath,
+                fontPath: $this->scaleFontPath ?? "",
                 fontColor: $this->scaleFontColor,
                 align: 'right',
                 valign: 'middle',
@@ -201,9 +201,8 @@ trait PlotterTrait
 
     /**
      * plots label of X
-     * @return  self
      */
-    private function plotLabelX()
+    private function plotLabelX(): self
     {
         if (!$this->labelX) {
             return $this;
@@ -221,7 +220,7 @@ trait PlotterTrait
             x: $x + $this->labelXOffsetX,
             y: $y + $this->labelXOffsetY,
             fontSize: $this->fontSize,
-            fontPath: $this->fontPath,
+            fontPath: $this->fontPath ?? "",
             fontColor: $this->fontColor,
             align: 'center',
             valign: 'bottom',
@@ -231,9 +230,8 @@ trait PlotterTrait
 
     /**
      * plots label of Y
-     * @return  self
      */
-    private function plotLabelY()
+    private function plotLabelY(): self
     {
         if (!$this->labelY) {
             return $this;
@@ -249,7 +247,7 @@ trait PlotterTrait
             x: $x,
             y: $y,
             fontSize: $this->fontSize,
-            fontPath: $this->fontPath,
+            fontPath: $this->fontPath ?? "",
             fontColor: $this->fontColor,
             align: 'center',
             valign: 'middle',
@@ -264,9 +262,8 @@ trait PlotterTrait
 
     /**
      * plots caption
-     * @return  self
      */
-    private function plotCaption()
+    private function plotCaption(): self
     {
         if (!$this->caption) {
             return $this;
@@ -280,7 +277,7 @@ trait PlotterTrait
             $x + $this->captionOffsetX,
             $y + $this->captionOffsetY,
             fontSize: $this->fontSize,
-            fontPath: $this->fontPath,
+            fontPath: $this->fontPath ?? "",
             fontColor: $this->fontColor,
             align: 'center',
             valign: 'bottom',
@@ -290,11 +287,8 @@ trait PlotterTrait
 
     /**
      * creates and saves the image
-     *
-     * @param   string  $path
-     * @return  self
      */
-    public function create(string $path)
+    public function create(string $path): self
     {
         $this->setProps();
         $this->plotGrids();
