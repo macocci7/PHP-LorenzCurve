@@ -22,7 +22,7 @@ fi
 test_and_lint() {
     echo "==========================================================="
     echo "[PHP $1][phpenv global $1]"
-    phpenv global $1
+    phpenv local $1
     if [ $? -ne 0 ]; then
         echo "Failed to switch version to $1. skipped."
         return 1
